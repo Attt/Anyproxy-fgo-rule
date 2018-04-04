@@ -10,7 +10,7 @@
 	修改FGO战斗数据
 	劫持ac.php请求的响应数据
 	在进入战斗时临时增加100000hp,技能全改为10级,宝具等级全为5级
-	敌方从者血量减半
+	敌方从者血量1/3,动作次数改为1,充能6格
 	
 	//todo
 	修改master技能，修改礼装技能，魔改从者(risk)
@@ -30,13 +30,19 @@ module.exports = { * beforeSendResponse(requestDetail, responseDetail) {
 
                 // 筛选所有敌方从者
                 if (svts[i]['hpGaugeType'] != undefined) {
+					// 修改血量 1/3
                     var eohp = Number(svts[i]['hp']);
-                    ehp = parseInt(eohp / 2);
+                    ehp = parseInt(eohp / 3);
                     if (typeof svts[i]['hp'] === 'number') {
                         svts[i]['hp'] = String(ehp);
                     } else {
                         svts[i]['hp'] = ehp;
                     }
+					
+					// 最大1动
+					svts[i]['maxActNum'] = 1;
+					// 充能6格
+					svts[i]['chargeTurn'] = 6;
                 }
                 // 筛选所有己方从者
                 if (svts[i]['status'] != undefined && svts[i]['userId'] != undefined && svts[i]['userId'] != '0' && svts[i]['userId'] != 0) {

@@ -9,7 +9,7 @@
 	//modify
 	修改FGO战斗数据
 	劫持ac.php请求的响应数据
-	在进入战斗时临时增加100000hp,技能全改为10级,宝具等级全为5级
+	在进入战斗时临时增加100000hp,5000atk,技能全改为10级,宝具等级全为5级
 	
 	//todo
 	修改master技能，修改礼装技能，魔改从者(risk)
@@ -35,6 +35,15 @@ module.exports = { * beforeSendResponse(requestDetail, responseDetail) {
                     } else {
                         svts[i]['hp'] = hp;
                     }
+					
+					var oatk = Number(svts[i]['atk']);
+					atk = oatk + 5000;
+					if (typeof svts[i]['atk'] === 'number') {
+						svts[i]['atk'] = String(atk);
+					} else {
+						svts[i]['atk'] = atk;
+					}
+					
                     svts[i]['skillLv1'] = '10';
                     svts[i]['skillLv2'] = '10';
                     svts[i]['skillLv3'] = '10';

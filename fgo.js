@@ -35,15 +35,15 @@ module.exports = { * beforeSendResponse(requestDetail, responseDetail) {
                     } else {
                         svts[i]['hp'] = hp;
                     }
-					
-					var oatk = Number(svts[i]['atk']);
-					atk = oatk + 5000;
-					if (typeof svts[i]['atk'] === 'number') {
-						svts[i]['atk'] = String(atk);
-					} else {
-						svts[i]['atk'] = atk;
-					}
-					
+
+                    var oatk = Number(svts[i]['atk']);
+                    atk = oatk + 5000;
+                    if (typeof svts[i]['atk'] === 'number') {
+                        svts[i]['atk'] = String(atk);
+                    } else {
+                        svts[i]['atk'] = atk;
+                    }
+
                     svts[i]['skillLv1'] = '10';
                     svts[i]['skillLv2'] = '10';
                     svts[i]['skillLv3'] = '10';

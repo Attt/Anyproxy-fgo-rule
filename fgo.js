@@ -26,6 +26,19 @@ module.exports = { * beforeSendResponse(requestDetail, responseDetail) {
             var svts = decJson['cache']['replaced']['battle'][0]['battleInfo']['userSvt'];
             //var count = 0;
             for (var i = 0; i < svts.length; i++) {
+                /* 直接修改从者atk是无效的，通过修改装备礼装的atk来影响从者总atk
+				*/
+                // 筛选所有装备礼装
+                if (svts[i]['deathRate'] == undefined) {
+                    var oatk = Number(svts[i]['atk']);
+                    atk = oatk + 5000;
+                    if (typeof svts[i]['atk'] === 'number') {
+                        svts[i]['atk'] = String(atk);
+                    } else {
+                        svts[i]['atk'] = atk;
+                    }
+                }
+                // 筛选所有己方从者
                 if (svts[i]['status'] != undefined && svts[i]['userId'] != undefined && svts[i]['userId'] != '0' && svts[i]['userId'] != 0) {
                     // 原始数据中好友从者HP为string类型，需先转换为number
                     var ohp = Number(svts[i]['hp']);
@@ -34,14 +47,6 @@ module.exports = { * beforeSendResponse(requestDetail, responseDetail) {
                         svts[i]['hp'] = String(hp);
                     } else {
                         svts[i]['hp'] = hp;
-                    }
-
-                    var oatk = Number(svts[i]['atk']);
-                    atk = oatk + 5000;
-                    if (typeof svts[i]['atk'] === 'number') {
-                        svts[i]['atk'] = String(atk);
-                    } else {
-                        svts[i]['atk'] = atk;
                     }
 
                     svts[i]['skillLv1'] = '10';

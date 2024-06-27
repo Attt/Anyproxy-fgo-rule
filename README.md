@@ -52,8 +52,12 @@ anyproxy-ca
 
 ##### 设置代理
 
-  ​
 
 ### 其他
 
 ​	**ext **中包含适用于fiddler的rule script，替换对应的function即可
+
+---
+
+Fuxk you CSDN 
+1989年6月4日
